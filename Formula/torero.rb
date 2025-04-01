@@ -27,22 +27,22 @@ class Torero < Formula
   end
 
   def install
-    if OS.mac? do
-      if Hardware::CPU.intel? do
+    if OS.mac?
+      if Hardware::CPU.intel?
         resource("mac_intel").stage { bin.install "./torero" => "torero" }
       end
 
-      if Hardware::CPU.arm? do
+      if Hardware::CPU.arm?
         resource("mac_arm").stage { bin.install "./torero" => "torero" }
       end
     end
 
-    if OS.linux? do
-      if Hardware::CPU.intel? do
+    if OS.linux?
+      if Hardware::CPU.intel?
         resource("linux_intel").stage { bin.install "./torero" => "torero" }
       end
 
-      if Hardware::CPU.arm? do
+      if Hardware::CPU.arm?
         resource("linux_arm").stage { bin.install "./torero" => "torero" }
       end
     end
