@@ -4,6 +4,7 @@ class Torero < Formula
   url "file:///dev/null"
   sha256 "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
   license "MIT"
+  version "1.3.0"
 
   resource "mac_amd" do
     url "https://download.torero.dev/torero-v1.3.0-darwin-amd64.tar.gz"
