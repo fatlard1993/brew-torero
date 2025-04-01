@@ -1,12 +1,12 @@
 class Torero < Formula
-  desc "torero is a simple to use, single binary tool to create, manage, deploy, maintain, and serve automations as services."
+  desc "A simple tool to create, manage, deploy, maintain, and serve automations as services"
   homepage "https://torero.dev"
+  version "1.3.0"
   url "file:///dev/null"
   sha256 "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
   license "MIT"
-  version "1.3.0"
 
-  resource "mac_amd" do
+  resource "mac_intel" do
     url "https://download.torero.dev/torero-v1.3.0-darwin-amd64.tar.gz"
     sha256 "654758e5dc1b799feaee6229d3378abfa8ff7ff7df72e9c12215776c9633816a"
   end
@@ -16,7 +16,7 @@ class Torero < Formula
     sha256 "20c312ef4016d37f701c3ce2a5b0b37ebb6304f7020dd567f25c368beac0e25f"
   end
 
-  resource "linux_amd" do
+  resource "linux_intel" do
     url "https://download.torero.dev/torero-v1.3.0-linux-amd64.tar.gz"
     sha256 "ef99444ea08455b2eb7e16bc32f7d8193b9d1247f8fb08dec7ac22d63c6286d7"
   end
@@ -27,22 +27,22 @@ class Torero < Formula
   end
 
   def install
-    on_macos do
-      on_amd do
-        resource("mac_amd").stage { bin.install "./torero" => "torero" }
+    if OS.mac? do
+      if Hardware::CPU.intel? do
+        resource("mac_intel").stage { bin.install "./torero" => "torero" }
       end
 
-      on_arm do
+      if Hardware::CPU.arm? do
         resource("mac_arm").stage { bin.install "./torero" => "torero" }
       end
     end
 
-    on_linux do
-      on_amd do
-        resource("linux_amd").stage { bin.install "./torero" => "torero" }
+    if OS.linux? do
+      if Hardware::CPU.intel? do
+        resource("linux_intel").stage { bin.install "./torero" => "torero" }
       end
 
-      on_arm do
+      if Hardware::CPU.arm? do
         resource("linux_arm").stage { bin.install "./torero" => "torero" }
       end
     end
@@ -53,7 +53,7 @@ class Torero < Formula
   end
 
   test do
-    assert_predicate bin/"torero", :exist?
+    assert_path_exists bin/"torero"
 
     system bin/"torero", "--version"
   end
