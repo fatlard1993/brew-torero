@@ -19,8 +19,13 @@ class ToreroV130DarwinAmd < Formula
   def install
     # Remove unrecognized options if they cause configure to fail
     # https://rubydoc.brew.sh/Formula.html#std_configure_args-instance_method
-    system "./configure", "--disable-silent-rules", *std_configure_args
+    system "tar", "-xzvf", "torero-v1.3.0-darwin-amd64.tar.gz"
+    system "mv", "./torero", "/usr/local/bin/torero"
     # system "cmake", "-S", ".", "-B", "build", *std_cmake_args
+  end
+
+  def post_install
+    system "torero", "get", "services" 
   end
 
   test do
@@ -33,6 +38,6 @@ class ToreroV130DarwinAmd < Formula
     #
     # The installed folder is not in the path, so use the entire path to any
     # executables being tested: `system bin/"program", "do", "something"`.
-    system "false"
+    echo "Success"? echo "Failure" if File.exist?("/usr/local/bin/torero")
   end
 end
