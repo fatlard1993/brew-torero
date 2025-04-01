@@ -38,6 +38,11 @@ class ToreroV130DarwinAmd < Formula
     #
     # The installed folder is not in the path, so use the entire path to any
     # executables being tested: `system bin/"program", "do", "something"`.
-    echo "Success"? echo "Failure" if File.exist?("/usr/local/bin/torero")
+    if File.exist?("/usr/local/bin/torero")
+      print "Success"
+    else
+      print "Failure"
+    end
   end
 end
+
