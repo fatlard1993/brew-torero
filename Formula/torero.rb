@@ -1,8 +1,8 @@
 class Torero < Formula
-  desc "A simple tool to create, manage, deploy, maintain, and serve automations as services"
+  desc "Create, manage, deploy, maintain, and serve automations as services"
   homepage "https://torero.dev"
-  version "1.3.0"
   url "file:///dev/null"
+  version "1.3.0"
   sha256 "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
   license "MIT"
 
@@ -28,23 +28,15 @@ class Torero < Formula
 
   def install
     if OS.mac?
-      if Hardware::CPU.intel?
-        resource("mac_intel").stage { bin.install "./torero" => "torero" }
-      end
+      resource("mac_intel").stage { bin.install "./torero" => "torero" } if Hardware::CPU.intel?
 
-      if Hardware::CPU.arm?
-        resource("mac_arm").stage { bin.install "./torero" => "torero" }
-      end
+      resource("mac_arm").stage { bin.install "./torero" => "torero" } if Hardware::CPU.arm?
     end
 
     if OS.linux?
-      if Hardware::CPU.intel?
-        resource("linux_intel").stage { bin.install "./torero" => "torero" }
-      end
+      resource("linux_intel").stage { bin.install "./torero" => "torero" } if Hardware::CPU.intel?
 
-      if Hardware::CPU.arm?
-        resource("linux_arm").stage { bin.install "./torero" => "torero" }
-      end
+      resource("linux_arm").stage { bin.install "./torero" => "torero" } if Hardware::CPU.arm?
     end
   end
 
