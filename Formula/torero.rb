@@ -25,21 +25,21 @@ class Torero < Formula
   end
 
   def install
-    odie "Unsupported architecture" if url == "file:///dev/null"?
+    odie "Unsupported architecture" if url == "file:///dev/null"
 
-    puts "------- Installing Torero -------"
+    ohai "------- Installing Torero -------"
 
     bin.install "./torero" => "torero"
   end
 
   def post_install
-    puts "------- Starting Torero -------"
+    ohai "------- Starting Torero -------"
 
     system bin/"torero"
   end
 
   test do
-    puts "------- Testing Torero Install -------"
+    ohai "------- Testing Torero Install -------"
 
     assert_path_exists bin/"torero"
   end
