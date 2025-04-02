@@ -67,9 +67,9 @@ def update_formula():
         for arch, info in architectureMap.items():
             if arch in line:
                 if "url" in line:
-                    line = f'      url "{info["url"]}"\n'
+                    line = f'        url "{info["url"]}"\n'
                 elif "sha256" in line:
-                    line = f'      sha256 "{info["sha256"]}" # {arch}\n'
+                    line = f'        sha256 "{info["sha256"]}" # {arch}\n'
         new_lines.append(line)
 
     # Write the updated content back to the .rb file
