@@ -3,13 +3,20 @@
 from git import Repo
 import requests
 
+import argparse
 import hashlib
 import os
 import sys
 
-version = sys.argv[1]
-username = sys.argv[2]
-token = sys.argv[3]
+parser = argparse.ArgumentParser(description="Update the published version of torero in homebrew")
+parser.add_argument('--version', required=True, help="The version to publish")
+parser.add_argument('--username', required=True, help="The github username with write access to the repo")
+parser.add_argument('--token', required=True, help="The github token that provides write access to the repo")
+args = parser.parse_args()
+
+version = args.version
+username = args.username
+token = args.token
 
 gitRemote = f"https://{username}:{token}@github.com/fatlard1993/homebrew-torero.git"
 
