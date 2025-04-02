@@ -94,4 +94,4 @@ except Exception as e:
 
 update_formula()
 
-# commit_changes()
+commit_changes()
