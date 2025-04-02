@@ -88,7 +88,7 @@ for architecture in architecture:
     architectureMap[architecture]["sha256"] = get_sha256_from_url(url)
 
 try:
-    clone_repo(gitRemote, directory)
+    clone_repo()
 except Exception as e:
     print(str(e))
 
