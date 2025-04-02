@@ -8,6 +8,14 @@ import os
 import sys
 
 version = sys.argv[1]
+username = sys.argv[2]
+token = sys.argv[3]
+
+gitRemote = f"https://{username}:{token}@github.com/fatlard1993/homebrew-torero.git"
+
+gitFolder = 'homebrew-torero'
+formulaPath = 'homebrew-torero/Formula/torero.rb'
+
 architecture = ["darwin-amd64","darwin-arm64","linux-amd64","linux-arm64"]
 
 architectureMap = {}
@@ -23,59 +31,30 @@ def get_sha256_from_url(url):
     # Return the hexadecimal SHA-256 hash of the file
     return sha256_hash.hexdigest()
 
-
-for architecture in architecture:
-    url=f"https://download.torero.dev/torero-v{version}-{architecture}.tar.gz"
-    architectureMap[architecture] = {}
-    architectureMap[architecture]["url"] = url
-    architectureMap[architecture]["sha256"] = get_sha256_from_url(url)
-
-print(architectureMap)
-
-def clone_repo(git_url, directory):
-    """
-    Clones a git repository into the specified directory.
-
-    Args:
-    git_url (str): URL of the git repository to clone.
-    directory (str): Local path to clone the repository into.
-    """
+def clone_repo():
     # Ensure the directory exists and is empty
-    if not os.path.exists(directory):
-        os.makedirs(directory)
+    if not os.path.exists(gitFolder):
+        os.makedirs(gitFolder)
     else:
-        if os.listdir(directory):  # Check if directory is empty
-            raise Exception(f"Directory {directory} is not empty. Please provide an empty directory.")
+        if os.listdir(gitFolder):  # Check if directory is empty
+            raise Exception(f"Directory {gitFolder} is not empty. Please provide an empty directory.")
 
     # Clone the repository
-    Repo.clone_from(git_url, directory)
-    print(f"Repository cloned into {directory}")
+    Repo.clone_from(gitRemote, gitFolder)
+    print(f"Repository cloned into {gitFolder}")
 
-# Example usage
-git_url = 'https://github.com/fatlard1993/homebrew-torero.git'
-directory = 'homebrew-torero'
-
-# try:
-#     clone_repo(git_url, directory)
-# except Exception as e:
-#     print(str(e))
-
-def update_rb_file(file_path, architecture_map):
+def update_formula():
     """
-    Update the .rb file with new URLs and SHA256 hashes.
-
-    Args:
-    file_path (str): Path to the .rb file to update.
-    architecture_map (dict): Dictionary containing the architecture, URLs, and SHA256 hashes.
+    Update the formula file with new URLs and SHA256 hashes.
     """
     # Read the original .rb file content
-    with open(file_path, 'r') as file:
+    with open(formulaPath, 'r') as file:
         lines = file.readlines()
 
     # Update lines with new URLs and SHA256 hashes
     new_lines = []
     for line in lines:
-        for arch, info in architecture_map.items():
+        for arch, info in architectureMap.items():
             if arch in line:
                 if "url" in line:
                     line = f'    url "{info["url"]}"\n'
@@ -83,10 +62,36 @@ def update_rb_file(file_path, architecture_map):
                     line = f'    sha256 "{info["sha256"]}"\n'
         new_lines.append(line)
 
+    print(new_lines)
+
     # Write the updated content back to the .rb file
-    with open(file_path, 'w') as file:
+    with open(formulaPath, 'w') as file:
         file.writelines(new_lines)
 
-# Example usage
-file_path = 'homebrew-torero/Formula/torero.rb'
-update_rb_file(file_path, architectureMap)
+def commit_changes(directory):
+    repo = Repo(full_local_path)
+
+    repo.git.add(formulaPath)
+    repo.index.commit(f"Update to {version}")
+
+    origin = repo.remote(name="origin")
+    origin.push()
+
+    print(f"Changes committed and pushed to {directory}")
+
+# --- #
+
+for architecture in architecture:
+    url=f"https://download.torero.dev/torero-v{version}-{architecture}.tar.gz"
+    architectureMap[architecture] = {}
+    architectureMap[architecture]["url"] = url
+    architectureMap[architecture]["sha256"] = get_sha256_from_url(url)
+
+try:
+    clone_repo(gitRemote, directory)
+except Exception as e:
+    print(str(e))
+
+update_formula()
+
+# commit_changes()
