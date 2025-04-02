@@ -9,15 +9,15 @@ class Torero < Formula
   if OS.mac?
     if Hardware::CPU.intel?
       resource "torero_resource" do
-        url "https://download.torero.dev/torero-v1.3.0-darwin-amd64.tar.gz"
-        sha256 "654758e5dc1b799feaee6229d3378abfa8ff7ff7df72e9c12215776c9633816a" # darwin-amd64
+    url "https://download.torero.dev/torero-v1.2.0-darwin-amd64.tar.gz"
+    sha256 "db868e450c54a492938074d1d20e07401123429bea58448a6cb69ba591dcbb4a"
       end
     end
 
     if Hardware::CPU.arm?
       resource "torero_resource" do
-        url "https://download.torero.dev/torero-v1.3.0-darwin-arm64.tar.gz"
-        sha256 "20c312ef4016d37f701c3ce2a5b0b37ebb6304f7020dd567f25c368beac0e25f" # darwin-arm64
+    url "https://download.torero.dev/torero-v1.2.0-darwin-arm64.tar.gz"
+    sha256 "c592d592d6ec02f045cabb43a87d7b649038a4114a2ca8f54aefff7150ad37ae"
       end
     end
   end
@@ -25,15 +25,15 @@ class Torero < Formula
   if OS.linux?
     if Hardware::CPU.intel?
       resource "torero_resource" do
-        url "https://download.torero.dev/torero-v1.3.0-linux-amd64.tar.gz"
-        sha256 "ef99444ea08455b2eb7e16bc32f7d8193b9d1247f8fb08dec7ac22d63c6286d7" # linux-amd64
+    url "https://download.torero.dev/torero-v1.2.0-linux-amd64.tar.gz"
+    sha256 "bb20c1834515825c2b384a09bb8b06beb0e37ba841a3c1f6af536390601b83ca"
       end
     end
 
     if Hardware::CPU.arm?
       resource "torero_resource" do
-        url "https://download.torero.dev/torero-v1.3.0-linux-arm64.tar.gz"
-        sha256 "de9b3f239d9f1adee2711906e18cd0fdec2f69f5da3513f443a71a956d1cb4a8" # linux-arm64
+    url "https://download.torero.dev/torero-v1.2.0-linux-arm64.tar.gz"
+    sha256 "53847d268f7197f321ce6e5af672452c595eccd6e9803dba3809a76c7f4fa221"
       end
     end
   end
