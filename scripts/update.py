@@ -14,8 +14,8 @@ token = sys.argv[3]
 gitRemote = f"https://{username}:{token}@github.com/fatlard1993/homebrew-torero.git"
 
 gitFolder = 'homebrew-torero'
-formulaPath = 'homebrew-torero/Formula/torero.rb'
-fullFormulaPath = f'{gitFolder}/Formula/torero.rb'
+formulaPath = 'Formula/torero.rb'
+fullFormulaPath = f'{gitFolder}/{formulaPath}'
 
 architecture = ["darwin-amd64","darwin-arm64","linux-amd64","linux-arm64"]
 
@@ -62,8 +62,6 @@ def update_formula():
                 elif "sha256" in line:
                     line = f'    sha256 "{info["sha256"]}"\n'
         new_lines.append(line)
-
-    print(new_lines)
 
     # Write the updated content back to the .rb file
     with open(fullFormulaPath, 'w') as file:
