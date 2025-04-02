@@ -68,8 +68,8 @@ def update_formula():
     with open(formulaPath, 'w') as file:
         file.writelines(new_lines)
 
-def commit_changes(directory):
-    repo = Repo(full_local_path)
+def commit_changes():
+    repo = Repo(gitFolder)
 
     repo.git.add(formulaPath)
     repo.index.commit(f"Update to {version}")
@@ -77,7 +77,7 @@ def commit_changes(directory):
     origin = repo.remote(name="origin")
     origin.push()
 
-    print(f"Changes committed and pushed to {directory}")
+    print(f"Changes committed and pushed to {gitFolder}")
 
 # --- #
 

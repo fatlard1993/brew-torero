@@ -10,4 +10,4 @@ The script(s) that live here are intended to be run via torero and describe the 
 ## Run
 
 > Update
-`torero run service python-script homebrew-update --set <version> <gitUser> <gitToken>`
+`torero run service python-script homebrew-update --set arg=<version> --set arg=<gitUser> --set arg=<gitToken>`
