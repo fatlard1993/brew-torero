@@ -86,6 +86,9 @@ for architecture in architecture:
     architectureMap[architecture]["url"] = url
     architectureMap[architecture]["sha256"] = get_sha256_from_url(url)
 
+print(f"Targeting {gitRemote}")
+print(f"Registering version {version}")
+
 try:
     clone_repo()
 except Exception as e:
