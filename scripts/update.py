@@ -15,6 +15,7 @@ gitRemote = f"https://{username}:{token}@github.com/fatlard1993/homebrew-torero.
 
 gitFolder = 'homebrew-torero'
 formulaPath = 'homebrew-torero/Formula/torero.rb'
+fullFormulaPath = f'{gitFolder}/Formula/torero.rb'
 
 architecture = ["darwin-amd64","darwin-arm64","linux-amd64","linux-arm64"]
 
@@ -48,7 +49,7 @@ def update_formula():
     Update the formula file with new URLs and SHA256 hashes.
     """
     # Read the original .rb file content
-    with open(formulaPath, 'r') as file:
+    with open(fullFormulaPath, 'r') as file:
         lines = file.readlines()
 
     # Update lines with new URLs and SHA256 hashes
@@ -65,7 +66,7 @@ def update_formula():
     print(new_lines)
 
     # Write the updated content back to the .rb file
-    with open(formulaPath, 'w') as file:
+    with open(fullFormulaPath, 'w') as file:
         file.writelines(new_lines)
 
 def commit_changes():
