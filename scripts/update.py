@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
 
 from git import Repo
+import requests
+
 import hashlib
 import os
-import requests
 import sys
 
 version = sys.argv[1]
