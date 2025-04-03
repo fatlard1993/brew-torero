@@ -37,9 +37,7 @@ class Torero < Formula
   end
 
   def post_install
-    ohai "------- Starting Torero -------"
-
-    system bin/"torero"
+    ohai "Successfully installed!"
   end
 
   test do
