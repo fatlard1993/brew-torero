@@ -30,14 +30,21 @@ class Torero < Formula
     odie "Unsupported architecture"
   end
 
+  resource "setupScript" do
+    url "https://github.com/fatlard1993/homebrew-torero/archive/refs/tags/setupScript.tar.gz"
+    sha256 "c4aa55b11bd35ab8910c732229c2058635fc188ef8c378e05360520dbdda76ce"
+  end
+
   def install
     ohai "------- Installing Torero -------"
 
     bin.install "./torero" => "torero"
+
+    resource("setupScript").stage { bin.install "./setup.sh" => "torero-setup" }
   end
 
   def post_install
-    ohai "Successfully installed!"
+    ohai "Successfully installed! :: For a guided configuration, run: torero-setup"
   end
 
   test do
