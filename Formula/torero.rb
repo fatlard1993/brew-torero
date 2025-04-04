@@ -2,27 +2,27 @@ class Torero < Formula
   desc "Create, manage, deploy, maintain, and serve automations as services"
   homepage "https://torero.dev"
   url "file:///dev/null"
-  version "1.3.0"
+  version "1.3.1"
   sha256 "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
   license "MIT"
 
   if OS.mac?
     if Hardware::CPU.intel?
-        url "https://download.torero.dev/torero-v1.3.0-darwin-amd64.tar.gz"
-        sha256 "654758e5dc1b799feaee6229d3378abfa8ff7ff7df72e9c12215776c9633816a" # darwin-amd64
+        url "https://download.torero.dev/torero-v1.3.1-darwin-amd64.tar.gz"
+        sha256 "8e756199350d6d6d2fd19f7e9633ae513cf7875edce9c9d2ba40757dc046a2b3" # darwin-amd64
     elsif Hardware::CPU.arm?
-        url "https://download.torero.dev/torero-v1.3.0-darwin-arm64.tar.gz"
-        sha256 "20c312ef4016d37f701c3ce2a5b0b37ebb6304f7020dd567f25c368beac0e25f" # darwin-arm64
+        url "https://download.torero.dev/torero-v1.3.1-darwin-arm64.tar.gz"
+        sha256 "a83bad0f2cec3cb93363f8df70624a4e3f547da6180946091a97fe332f21e50f" # darwin-arm64
     else
       odie "Unsupported architecture"
     end
   elsif OS.linux?
     if Hardware::CPU.intel?
-        url "https://download.torero.dev/torero-v1.3.0-linux-amd64.tar.gz"
-        sha256 "ef99444ea08455b2eb7e16bc32f7d8193b9d1247f8fb08dec7ac22d63c6286d7" # linux-amd64
+        url "https://download.torero.dev/torero-v1.3.1-linux-amd64.tar.gz"
+        sha256 "c15e4c0878035d1587057434bdbd8b324aa669bb5fbcc9b4ac1e21c4f685a717" # linux-amd64
     elsif Hardware::CPU.arm?
-        url "https://download.torero.dev/torero-v1.3.0-linux-arm64.tar.gz"
-        sha256 "de9b3f239d9f1adee2711906e18cd0fdec2f69f5da3513f443a71a956d1cb4a8" # linux-arm64
+        url "https://download.torero.dev/torero-v1.3.1-linux-arm64.tar.gz"
+        sha256 "ac61264702e50040e0d8c0acdd9c6aff822a5abb92142108f69cbfe96f25ee84" # linux-arm64
     else
       odie "Unsupported architecture"
     end
